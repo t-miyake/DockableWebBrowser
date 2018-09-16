@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Reflection;
+using System.Diagnostics.CodeAnalysis;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace DockableWebBrowser
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Windows;
-    using System.Windows.Controls;
-
     /// <summary>
     /// Interaction logic for Dockable_Web_BrowserControl.
     /// </summary>
     public partial class Dockable_Web_BrowserControl : UserControl
     {
-        public const string FeatureBrowserEmulation = @"Software\Microsoft\Internet Explorer\Main\FeatureControl\FEATURE_BROWSER_EMULATION";
-        private readonly Microsoft.Win32.RegistryKey _regkey = Microsoft.Win32.Registry.CurrentUser.CreateSubKey(FeatureBrowserEmulation);
-        readonly string _myName = System.IO.Path.GetFileName(Assembly.GetExecutingAssembly().Location);
-
         /// <summary>
         /// Initializes a new instance of the <see cref="Dockable_Web_BrowserControl"/> class.
         /// </summary>
         public Dockable_Web_BrowserControl()
         {
-            this.InitializeComponent();
-            _regkey.SetValue(_myName, 11001, Microsoft.Win32.RegistryValueKind.DWord);
-            _regkey.Close();
+            InitializeComponent();
+            WebView.Source = new Uri("https://www.google.co.jp/");
         }
 
         /// <summary>
